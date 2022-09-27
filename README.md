@@ -33,3 +33,8 @@ Si un véhicule est disponible et que le locataire est bien enregistré sur l'ap
 L'application déterminera de manière automatique le prix total de la location en fonction de la période choisie.
 
 Un récapitulatif de la location est automatiquement disponible sur une page de **gestion des locations**.
+
+
+## Diagramme UML de classe entités/relations 
+
+![Diagramme UML de classe entités/relations ](/chemin/access/image.jpg).
