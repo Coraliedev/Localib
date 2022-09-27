@@ -37,4 +37,4 @@ Un récapitulatif de la location est automatiquement disponible sur une page de 
 
 ## Diagramme UML de classe entités/relations 
 
-![Diagramme UML de classe entités/relations ](/chemin/access/image.jpg).
+![Diagramme UML de classe entités/relations ](/assets/UML_diagram_entity-relationship.jpg).
