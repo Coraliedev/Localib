@@ -54,3 +54,21 @@ module.exports.deleteClientById = (req, res) => {
     }
   });
 };
+
+// Update a Client identified by the clientId in the request
+module.exports.updateClientById = (req, res) => {
+  ClientModel.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, data) => {
+      if (!err) {
+        res.send(data);
+      } else {
+        res.status(500).send({
+          message: `Error updating Client with id ${req.params.id}.`,
+        });
+      }
+    }
+  );
+};
