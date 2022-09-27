@@ -39,3 +39,18 @@ module.exports.getAllVehicles = (req, res) => {
     else res.send(data);
   });
 };
+
+// Delete a Vehicle with the specified vehicleId in the request
+module.exports.deleteVehicleById = (req, res) => {
+  VehicleModel.findByIdAndRemove(req.params.id, (err) => {
+    if (!err) {
+      res.send({
+        message: `Vehicle ${req.params.id} was deleted successfully!`,
+      });
+    } else {
+      res.status(500).send({
+        message: `Could not delete Vehicle with id ${req.params.id} `,
+      });
+    }
+  });
+};
