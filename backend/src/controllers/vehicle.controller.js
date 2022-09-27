@@ -54,3 +54,21 @@ module.exports.deleteVehicleById = (req, res) => {
     }
   });
 };
+
+// Update a Vehicle identified by the vehicleId in the request
+module.exports.updateVehicleById = (req, res) => {
+  VehicleModel.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, data) => {
+      if (!err) {
+        res.send(data);
+      } else {
+        res.status(500).send({
+          message: `Could not update Vehicle with id ${req.params.id} `,
+        });
+      }
+    }
+  );
+};
