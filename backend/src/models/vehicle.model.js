@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const carSchema = mongoose.Schema({
+const VehicleSchema = mongoose.Schema({
   brand: {
     type: String,
     required: true,
@@ -32,7 +32,10 @@ const carSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  locationPrice: {},
+  locationPrice: {
+    type: Number,
+    required: true
+  },
   type: {
     type: String,
     enum: ["Voiture", "Camion", "Moto", "Utilitaire"],
@@ -40,5 +43,5 @@ const carSchema = mongoose.Schema({
   },
 });
 
-const CarModel = mongoose.model("Car", carSchema);
-module.exports = CarModel;
+const VehicleModel = mongoose.model("Vehicle", VehicleSchema);
+module.exports = VehicleModel;

@@ -1,16 +1,18 @@
 const express = require("express");
-const bodyParser=require('body-parser')
-const clientRoutes = require('./src/routes/client.routes')
+const bodyParser = require("body-parser");
+const clientRoutes = require("./src/routes/client.routes");
+const vehicleRoutes = require("./src/routes/vehicle.routes");
 
 require("dotenv").config({ path: "./src/config/.env" });
-require('./src/config/db');
+require("./src/config/db");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
-app.use('/client',clientRoutes);
+app.use("/client", clientRoutes);
+app.use("/vehicle", vehicleRoutes);
 
 // server
 app.listen(process.env.PORT, () => {
