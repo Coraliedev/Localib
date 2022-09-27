@@ -13,8 +13,20 @@ module.exports.createClient = (req, res) => {
 
   // Save Client in the database
   ClientModel.create(client, (err, data) => {
-    if (err)
-      res.status(500).send(err);
+    if (err) res.status(500).send(err);
     else res.send(data);
   });
-}
+};
+
+// Retrieve a single Client with clientId
+module.exports.getClientById = (req, res) => {
+  ClientModel.findById(req.params.id, (err, data) => {
+    if (!err) {
+      res.send(data);
+    } else {
+      res.status(404).send({
+        message: `Not found Client with id ${req.params.id}.`,
+      });
+    }
+  });
+};
