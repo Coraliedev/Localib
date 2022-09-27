@@ -30,3 +30,11 @@ module.exports.getClientById = (req, res) => {
     }
   });
 };
+
+// Retrieve all Clients from the database.
+module.exports.getAllClients = (req, res) => {
+  ClientModel.find({}, (err, data) => {
+    if (err) res.status(500).send(err);
+    else res.send(data);
+  });
+};
