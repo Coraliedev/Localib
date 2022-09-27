@@ -44,3 +44,18 @@ module.exports.getAllRents = (req, res) => {
       else res.send(data);
     });
 };
+
+// Delete a Rent with the specified rentId in the request
+module.exports.deleteRentById = (req, res) => {
+  RentModel.findByIdAndRemove(req.params.id, (err) => {
+    if (!err) {
+      res.send({
+        message: `Rent ${req.params.id} was deleted successfully!`,
+      });
+    } else {
+      res.status(500).send({
+        message: `Could not delete Rent with id ${req.params.id} ` + req.params.id,
+      });
+    }
+  });
+};
