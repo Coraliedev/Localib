@@ -33,3 +33,14 @@ module.exports.getRentById = (req, res) => {
       }
     });
 };
+
+// Retrieve all Rents from the database and populate client and vehicle
+module.exports.getAllRents = (req, res) => {
+  RentModel.find({})
+    .populate("client")
+    .populate("vehicle")
+    .exec((err, data) => {
+      if (err) res.status(500).send(err);
+      else res.send(data);
+    });
+};
