@@ -59,3 +59,27 @@ module.exports.deleteRentById = (req, res) => {
     }
   });
 };
+
+// Update a Rent identified by the rentId in the request
+module.exports.updateRentById = (req, res) => {
+  RentModel.findByIdAndUpdate(
+    req.params.id,
+    {
+      client: req.body.client,
+      vehicle: req.body.vehicle,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      price: req.body.price,
+    },
+    { new: true },
+    (err, data) => {
+      if (!err) {
+        res.send(data);
+      } else {
+        res.status(500).send({
+          message: `Error updating Rent with id ${req.params.id}.`,
+        });
+      }
+    }
+  );
+};
