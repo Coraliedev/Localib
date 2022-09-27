@@ -1,9 +1,12 @@
-const HomePage = () => {
+import Header from "../../components/header/header.component";
+
+const HomePage: React.FC = () => {
   return (
-    <div>
-      HomePage
-    </div>
-  )
-}
+    <>
+      <Header />
+      Home Page
+    </>
+  );
+};
 
 export default HomePage;

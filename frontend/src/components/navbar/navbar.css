@@ -1,0 +1,15 @@
+.nav {
+  margin-left: 150px;
+  font-size: 35px;
+}
+
+.nav a:hover,
+.nav a:active,
+.nav a:focus,
+.nav a:visited,
+.nav a:link {
+  color: #1a1a1a;
+  text-decoration-style: none;
+  text-decoration: none;
+  margin-right: 60px;
+}

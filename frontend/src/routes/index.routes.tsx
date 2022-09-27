@@ -10,7 +10,7 @@ import HomePage from "../pages/home/home.page";
 import RentsPage from "../pages/rents/rents.page";
 import VehiclesPage from "../pages/vehicles/vehicles.page";
 
-const index = () => {
+const index: React.FC = () => {
   return (
     <div>
       <Router>
