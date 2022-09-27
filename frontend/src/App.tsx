@@ -1,7 +1,10 @@
+import Routes from "./routes/index.routes";
 
 function App() {
   return (
-   <div>Hello World</div>
+    <div className="App">
+      <Routes />
+    </div>
   );
 }
 
