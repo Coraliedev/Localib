@@ -31,3 +31,11 @@ module.exports.getVehicleById = (req, res) => {
     }
   });
 };
+
+// Retrieve all Vehicles from the database.
+module.exports.getAllVehicles = (req, res) => {
+  VehicleModel.find({}, (err, data) => {
+    if (err) res.status(500).send(err);
+    else res.send(data);
+  });
+};
