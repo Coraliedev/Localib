@@ -38,3 +38,19 @@ module.exports.getAllClients = (req, res) => {
     else res.send(data);
   });
 };
+
+// Delete a Client with the specified clientId in the request
+module.exports.deleteClientById = (req, res) => {
+  ClientModel.findByIdAndRemove(req.params.id, (err) => {
+    if (!err) {
+      res.send({
+        message: `Client ${req.params.id} was deleted successfully!`,
+      });
+    } else {
+      res.status(500).send({
+        message:
+          `Could not delete Client with id ${req.params.id} ` + req.params.id,
+      });
+    }
+  });
+};
