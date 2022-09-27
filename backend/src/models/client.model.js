@@ -33,8 +33,9 @@ const clientSchema = mongoose.Schema({
   },
   birthdate: {
     type: Date,
-    required: true
+    required: true,
   },
 });
 
-export const ClienModel = mongoose.model("Client", clientSchema);
+const ClientModel = mongoose.model("Client", clientSchema);
+module.exports = ClientModel;
