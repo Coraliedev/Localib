@@ -3,10 +3,12 @@ const bodyParser = require("body-parser");
 const clientRoutes = require("./src/routes/client.routes");
 const vehicleRoutes = require("./src/routes/vehicle.routes");
 const rentRoutes = require("./src/routes/rent.routes");
+const cors = require("cors");
 
 require("dotenv").config({ path: "./src/config/.env" });
 require("./src/config/db");
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
