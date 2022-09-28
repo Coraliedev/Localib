@@ -16,14 +16,14 @@ const clientSchema = mongoose.Schema({
     minLenght: 3,
     maxLenght: 50,
   },
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-    lowercase: true,
-    validate: [isEmail, "Please enter a valid email"],
-  },
+  // email: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  //   unique: true,
+  //   lowercase: true,
+  //   validate: [isEmail, "Please enter a valid email"],
+  // },
   phone: {
     type: String,
     required: true,
