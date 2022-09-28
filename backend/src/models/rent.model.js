@@ -4,10 +4,12 @@ const rentSchema = mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
+    required: true,
   },
   vehicle: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Vehicle",
+    required: true,
   },
   startDate: {
     type: Date,
