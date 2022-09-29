@@ -18,6 +18,7 @@ export const Client: React.FC<ClientProps> = ({ client }) => {
       queryClient.invalidateQueries("clients");
     },
   });
+
   return (
     <div className="client">
       <p>
@@ -31,6 +32,9 @@ export const Client: React.FC<ClientProps> = ({ client }) => {
       </p>
       <p>
         <span>Date de naissance</span> : {birthdate}
+      </p>
+      <p>
+        <span>E-mail</span> : {client.email}
       </p>
       <button
         className="delete_button"

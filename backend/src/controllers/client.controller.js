@@ -6,7 +6,7 @@ module.exports.createClient = (req, res) => {
   const client = new ClientModel({
     lastname: req.body.lastname,
     firstname: req.body.firstname,
-    // email: req.body.email,
+    email: req.body.email,
     phone: req.body.phone,
     birthdate: req.body.birthdate,
   });

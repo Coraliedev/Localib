@@ -6,16 +6,19 @@ export const getAllClients = async () => {
   return data;
 };
 
-export const addClient = async () => {
+type update = {
+  firstname: String;
+  lastname: String;
+  email: String;
+  phone: String;
+  birthdate: String;
+};
+
+export const addClient = async (update: update) => {
   const response = await axios({
     method: "post",
     url: "http://localhost:3001/client",
-    data: {
-      lastname: "test",
-      firstname: "test",
-      phone: "0000000000",
-      birthdate: "2021-01-01",
-    },
+    data: update,
   });
   return response;
 };
