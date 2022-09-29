@@ -7,17 +7,28 @@ import { GrEdit } from "react-icons/gr";
 
 interface ClientProps {
   client: ClientModel;
+  modifyIdValue: (client: ClientModel) => void;
 }
 
-export const Client: React.FC<ClientProps> = ({ client }) => {
+export const Client: React.FC<ClientProps> = ({ client, modifyIdValue }) => {
   let birthdate = new Date(client.birthdate).toLocaleDateString();
   const queryClient = useQueryClient();
 
+/* A hook that allows to make a mutation request for delete a client */
   const { mutate: handleDeleteClient } = useMutation(deleteClient, {
     onSuccess: () => {
       queryClient.invalidateQueries("clients");
     },
   });
+
+  /**
+   * When the user clicks on the edit button, the form for add client to the database will appear.
+   */
+  const displayEditClientForm = () => {
+    let clientUpdateForm = document.getElementsByTagName("form")[1];
+    clientUpdateForm.style.display = "flex";
+    modifyIdValue(client);
+  };
 
   return (
     <div className="client">
@@ -42,7 +53,7 @@ export const Client: React.FC<ClientProps> = ({ client }) => {
       >
         <RiDeleteBinLine />
       </button>
-      <button className="edit_button">
+      <button className="edit_button" onClick={() => displayEditClientForm()}>
         <GrEdit />
       </button>
     </div>

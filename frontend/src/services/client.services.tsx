@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const getAllClients = async () => {
   const { data } = await axios.get("http://localhost:3001/client");
-  console.log(data[0]._id);
   return data;
 };
 
@@ -25,4 +24,13 @@ export const addClient = async (update: update) => {
 
 export const deleteClient = async (id: string) => {
   await axios.delete(`http://localhost:3001/client/${id}`);
+};
+
+export const updateClientById = async (clientUpdate: any) => {
+  const response = await axios({
+    method: "put",
+    url: `http://localhost:3001/client/${clientUpdate[0]}`,
+    data: clientUpdate[1],
+  });
+  return response;
 };

@@ -34,6 +34,14 @@ h2 {
   margin-bottom: 10px;
 }
 
+.client_form .title_client_update_form {
+  display: none;
+}
+
+.client_update_form .title_client_form {
+  display: none;
+}
+
 #submit {
   font-size: 25px;
   background: none;
