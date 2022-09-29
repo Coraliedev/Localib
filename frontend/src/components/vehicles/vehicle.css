@@ -1,0 +1,15 @@
+.vehicle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 65vw;
+  min-width: 65vw;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 10px;
+  margin-left: 5vw;
+  transition: all 0.2s ease-in-out;
+}

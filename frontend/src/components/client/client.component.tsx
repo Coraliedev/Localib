@@ -14,7 +14,7 @@ export const Client: React.FC<ClientProps> = ({ client, modifyIdValue }) => {
   let birthdate = new Date(client.birthdate).toLocaleDateString();
   const queryClient = useQueryClient();
 
-/* A hook that allows to make a mutation request for delete a client */
+  /* A hook that allows to make a mutation request for delete a client */
   const { mutate: handleDeleteClient } = useMutation(deleteClient, {
     onSuccess: () => {
       queryClient.invalidateQueries("clients");
@@ -32,21 +32,23 @@ export const Client: React.FC<ClientProps> = ({ client, modifyIdValue }) => {
 
   return (
     <div className="client">
-      <p>
-        <span>Nom</span> : {client.lastname}
-      </p>
-      <p>
-        <span>Prénom</span> : {client.firstname}
-      </p>
-      <p>
-        <span>Téléphone</span> : {client.phone}
-      </p>
-      <p>
-        <span>Date de naissance</span> : {birthdate}
-      </p>
-      <p>
-        <span>E-mail</span> : {client.email}
-      </p>
+      <div>
+        <p>
+          <span>Nom</span> : {client.lastname}
+        </p>
+        <p>
+          <span>Prénom</span> : {client.firstname}
+        </p>
+        <p>
+          <span>Téléphone</span> : {client.phone}
+        </p>
+        <p>
+          <span>Date de naissance</span> : {birthdate}
+        </p>
+        <p>
+          <span>E-mail</span> : {client.email}
+        </p>
+      </div>
       <button
         className="delete_button"
         onClick={() => handleDeleteClient(client._id)}

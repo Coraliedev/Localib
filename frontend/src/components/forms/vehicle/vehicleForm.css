@@ -1,5 +1,5 @@
-.client_form,
-.client_update_form {
+.vehicle_form,
+.vehicle_update_form {
   display: none;
   flex-direction: column;
   margin-top: 3vw;
@@ -12,19 +12,19 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.client_form div,
-.client_update_form div {
-  font-size: 25px;
+.vehicle_form div,
+.vehicle_update_form div {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.client_form div input,
-.client_update_form div input {
+.vehicle_form div input,
+.vehicle_update_form div input {
   width: 15vw;
-  height: 30px;
+  height: 25px;
   text-align: center;
   background: none;
   border: thin solid;
@@ -32,25 +32,30 @@
   margin: 0 2vw;
 }
 
-h2 {
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 10px;
+.vehicle_form div input[type="checkbox"],
+.vehicle_update_form div input[type="checkbox"] {
+  height: 1vw;
+}
+.vehicle_form div select,
+.vehicle_update_form div select {
+  width: 5vw;
+  margin: 0 auto;
 }
 
-.client_form .title_client_update_form {
+.vehicle_form .title_vehicle_update_form {
   display: none;
 }
 
-.client_update_form .title_client_form {
+.vehicle_update_form .title_vehicle_form {
   display: none;
 }
 
 #submit {
-  font-size: 25px;
+  font-size: 20px;
   background: none;
   border: thin solid;
   border-radius: 10px;
   margin: 0 2vw;
   margin-top: 1vw;
+  margin-bottom: 1vw;
 }

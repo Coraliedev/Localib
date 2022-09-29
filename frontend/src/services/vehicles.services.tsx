@@ -5,20 +5,19 @@ export const getAllVehicles = async () => {
   return data;
 };
 
-export const addVehicle = async () => {
+export const addVehicle = async (update: any) => {
   const response = await axios({
     method: "post",
     url: "http://localhost:3001/vehicle",
-    data: {
-      brand: "marque",
-      model: "modèle",
-      matriculation: "immatriculation",
-      state: "A",
-      available: true,
-      locationPrice: 50,
-      type: "Voiture",
-    },
+    data: update,
   });
-  console.log(response);
+  return response;
+};
+
+export const deleteVehicle = async (id: string) => {
+  const response = await axios({
+    method: "delete",
+    url: "http://localhost:3001/vehicle/" + id,
+  });
   return response;
 };

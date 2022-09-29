@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getAllClients } from "../../services/client.services";
 import ClientModel from "../../models/client.model";
-import "./clients.css";
+import "./clients.page.css";
 import Header from "../../components/header/header.component";
 import { Client } from "../../components/client/client.component";
 import { ClientForm } from "../../components/forms/client/clientForm.component";
@@ -36,9 +36,12 @@ const ClientsPage: React.FC = () => {
       <Header />
       <div className="clients">
         <div>
-          <button className="add_client" onClick={() => displayClientForm()}>
-            Ajouter un client
-          </button>
+          <input
+            type="button"
+            className="add_client"
+            value=" Ajouter un client"
+            onClick={() => displayClientForm()}
+          ></input>
           {clients &&
             clients.map((client: ClientModel) => (
               <Client
@@ -48,7 +51,6 @@ const ClientsPage: React.FC = () => {
               />
             ))}
         </div>
-
         <ClientForm className="client_form" />
         <ClientForm className="client_update_form" client={client} />
       </div>

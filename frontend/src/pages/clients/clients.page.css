@@ -2,16 +2,18 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: #f2f2f2;
+  height: 85vh;
 }
 
-.add_client {
+.clients .add_client {
+  background-color: #fff;
   margin-left: 5vw;
-  color: rgb(70, 69, 69);
-  background: none;
+  color: rgb(69, 69, 70);
   border-radius: 5px;
   border: thin solid rgb(70, 69, 69);
   font-size: 1.5vw;
-  margin-top: 5px;
+  margin-top: 1vw;
   padding: 5px 5px;
   margin-bottom: 10px;
 }
