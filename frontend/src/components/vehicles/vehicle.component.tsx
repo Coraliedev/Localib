@@ -1,3 +1,4 @@
+import { GrEdit } from "react-icons/gr";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useMutation, useQueryClient } from "react-query";
 import VehicleModel from "../../models/vehicle.model";
@@ -6,9 +7,13 @@ import "./vehicle.css";
 
 interface Vehicleprops {
   vehicle: VehicleModel;
+  modifyVehicleValue: (vehicle: VehicleModel) => void;
 }
 
-export const Vehicle: React.FC<Vehicleprops> = ({ vehicle }) => {
+export const Vehicle: React.FC<Vehicleprops> = ({
+  vehicle,
+  modifyVehicleValue,
+}) => {
   const queryClient = useQueryClient();
 
   // delete vehicle from database
@@ -17,6 +22,13 @@ export const Vehicle: React.FC<Vehicleprops> = ({ vehicle }) => {
       queryClient.invalidateQueries("vehicles");
     },
   });
+
+  // display vehicle update form when click on edit button
+  const displayEditVehicleForm = () => {
+    let vehicleForm = document.getElementsByTagName("form")[1];
+    vehicleForm.style.display = "flex";
+    modifyVehicleValue(vehicle);
+  };
 
   return (
     <div className="vehicle">
@@ -49,6 +61,9 @@ export const Vehicle: React.FC<Vehicleprops> = ({ vehicle }) => {
         onClick={() => handleDeleteVehicle(vehicle._id)}
       >
         <RiDeleteBinLine />
+      </button>
+      <button className="edit_button" onClick={() => displayEditVehicleForm()}>
+        <GrEdit />
       </button>
     </div>
   );

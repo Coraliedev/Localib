@@ -21,3 +21,13 @@ export const deleteVehicle = async (id: string) => {
   });
   return response;
 };
+
+export const updateVehicleById = async (VehicleUpdate: any) => {
+  const response = await axios({
+    method: "put",
+    url: `http://localhost:3001/vehicle/${VehicleUpdate[0]}`,	
+    data: VehicleUpdate[1],
+  });
+  console.log(response);
+  return response;
+};

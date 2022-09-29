@@ -7,10 +7,13 @@ import { GrEdit } from "react-icons/gr";
 
 interface ClientProps {
   client: ClientModel;
-  modifyIdValue: (client: ClientModel) => void;
+  modifyClientValue: (client: ClientModel) => void;
 }
 
-export const Client: React.FC<ClientProps> = ({ client, modifyIdValue }) => {
+export const Client: React.FC<ClientProps> = ({
+  client,
+  modifyClientValue,
+}) => {
   let birthdate = new Date(client.birthdate).toLocaleDateString();
   const queryClient = useQueryClient();
 
@@ -27,7 +30,7 @@ export const Client: React.FC<ClientProps> = ({ client, modifyIdValue }) => {
   const displayEditClientForm = () => {
     let clientUpdateForm = document.getElementsByTagName("form")[1];
     clientUpdateForm.style.display = "flex";
-    modifyIdValue(client);
+    modifyClientValue(client);
   };
 
   return (

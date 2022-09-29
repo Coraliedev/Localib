@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import VehicleModel from "../../../models/vehicle.model";
-import { addVehicle } from "../../../services/vehicles.services";
+import {
+  addVehicle,
+  updateVehicleById,
+} from "../../../services/vehicles.services";
 import "./vehicleForm.css";
 
 interface VehicleFormProps {
@@ -21,6 +24,12 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
     },
   });
 
+  const { mutate: updateVehicle } = useMutation(updateVehicleById, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("vehicles");
+    },
+  });
+
   const submitVehicle = (e: any) => {
     e.preventDefault();
     let thisVehicle = {
@@ -35,25 +44,29 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
     if (className === "vehicle_form") {
       newVehicle(thisVehicle);
     }
+    if (className === "vehicle_update_form" && vehicle) {
+      const VehicleUpdate = [vehicle._id, thisVehicle];
+      updateVehicle(VehicleUpdate);
+    }
     e.target.reset();
     e.target.style.display = "none";
   };
 
   return (
     <form name={className} className={className} onSubmit={submitVehicle}>
-      <h2 className="title_vehicle_update_form">Modifier véhicule</h2>
+      <h2 className="title_vehicle_update_form" >Modifier véhicule</h2>
       <h2 className="title_vehicle_form">Nouveau véhicule</h2>
       <div className="brand">
         <label htmlFor="brand">Marque:</label>
-        <input type="text" name="brand" id="brand" />
+        <input type="text" name="brand" id="brand" defaultValue={vehicle?.brand}/>
       </div>
       <div className="model">
         <label htmlFor="model">Modèle:</label>
-        <input type="text" name="model" id="model" />
+        <input type="text" name="model" id="model" defaultValue={vehicle?.model}/>
       </div>
       <div className="matriculation">
         <label htmlFor="matriculation">Immatriculation:</label>
-        <input type="text" name="matriculation" id="matriculation" />
+        <input type="text" name="matriculation" id="matriculation" defaultValue={vehicle?.matriculation}/>
       </div>
       <div className="state">
         <label htmlFor="state">Etat:</label>
@@ -73,7 +86,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       </div>
       <div className="locationPrice">
         <label htmlFor="locationPrice">Prix à la journée:</label>
-        <input type="number" name="locationPrice" id="locationPrice" />
+        <input type="number" name="locationPrice" id="locationPrice" defaultValue={vehicle?.locationPrice} />
       </div>
       <div className="type">
         <label htmlFor="type">Type:</label>

@@ -8,14 +8,7 @@ import { ClientForm } from "../../components/forms/client/clientForm.component";
 import { useState } from "react";
 
 const ClientsPage: React.FC = () => {
-  const [client, setClient] = useState<ClientModel>({
-    _id: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    birthdate: new Date(),
-  });
+  const [client, setClient] = useState<ClientModel>({} as ClientModel);
 
   // get all clients from database
   const { data: clients } = useQuery("clients", getAllClients, {
@@ -47,7 +40,7 @@ const ClientsPage: React.FC = () => {
               <Client
                 key={client._id}
                 client={client}
-                modifyIdValue={setClient}
+                modifyClientValue={setClient}
               />
             ))}
         </div>

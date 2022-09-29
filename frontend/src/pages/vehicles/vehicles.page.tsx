@@ -1,12 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import { VehicleForm } from "../../components/forms/vehicle/vehicleForm.component";
 import Header from "../../components/header/header.component";
 import { Vehicle } from "../../components/vehicles/vehicle.component";
-import { addVehicle, getAllVehicles } from "../../services/vehicles.services";
+import VehicleModel from "../../models/vehicle.model";
+import { getAllVehicles } from "../../services/vehicles.services";
 import "./vehicles.page.css";
 
 const VehiclesPage: React.FC = () => {
-  const queryClient = useQueryClient();
+  const [vehicle, setVehicle] = useState<VehicleModel>({} as VehicleModel);
 
   // get all vehicles from database
   const { data: vehicles } = useQuery("vehicles", getAllVehicles, {
@@ -35,11 +37,15 @@ const VehiclesPage: React.FC = () => {
           ></input>
           {vehicles &&
             vehicles.map((vehicle: any) => (
-              <Vehicle key={vehicle._id} vehicle={vehicle} />
+              <Vehicle
+                key={vehicle._id}
+                vehicle={vehicle}
+                modifyVehicleValue={setVehicle}
+              />
             ))}
         </div>
         <VehicleForm className="vehicle_form" />
-        <VehicleForm className="vehicle_update_form" />
+        <VehicleForm className="vehicle_update_form" vehicle={vehicle} />
       </div>
     </div>
   );
