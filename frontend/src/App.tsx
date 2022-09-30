@@ -1,6 +1,7 @@
 import Routes from "./routes/index.routes";
 import "./App.css";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <div className="App">
         <Routes />
       </div>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
