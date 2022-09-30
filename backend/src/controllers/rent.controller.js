@@ -1,4 +1,5 @@
 const RentModel = require("../models/rent.model");
+const VehicleModel = require("../models/vehicle.model");
 
 // Create and Save a new Rent
 module.exports.createRent = (req, res) => {
@@ -16,6 +17,19 @@ module.exports.createRent = (req, res) => {
     if (err) res.status(500).send(err);
     else res.send(data);
   });
+
+  // update unvaible dates of the vehicle
+  VehicleModel.findByIdAndUpdate(
+    req.body.vehicle,
+    {
+      $push: {
+        unavailableDates: [req.body.startDate, req.body.endDate],
+      },
+    },
+    function (err) {
+      if (err) res.status(500).send(err);
+    }
+  );
 };
 
 // Retrieve a single Rent with rentId and populate client and vehicle
@@ -54,7 +68,8 @@ module.exports.deleteRentById = (req, res) => {
       });
     } else {
       res.status(500).send({
-        message: `Could not delete Rent with id ${req.params.id} ` + req.params.id,
+        message:
+          `Could not delete Rent with id ${req.params.id} ` + req.params.id,
       });
     }
   });

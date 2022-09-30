@@ -28,10 +28,6 @@ const VehicleSchema = mongoose.Schema({
     enum: ["A", "B", "C", "D"],
     required: true,
   },
-  available: {
-    type: Boolean,
-    required: true,
-  },
   locationPrice: {
     type: Number,
     required: true
@@ -40,6 +36,10 @@ const VehicleSchema = mongoose.Schema({
     type: String,
     enum: ["Voiture", "Camion", "Moto", "Utilitaire"],
     required: true,
+  },
+  unavailableDates: {
+    type: [Array],
+    default: [],
   },
 });
 

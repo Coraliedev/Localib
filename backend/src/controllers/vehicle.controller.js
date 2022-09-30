@@ -8,7 +8,6 @@ module.exports.createVehicle = (req, res) => {
     model: req.body.model,
     matriculation: req.body.matriculation,
     state: req.body.state,
-    available: req.body.available,
     locationPrice: req.body.locationPrice,
     type: req.body.type,
   });
@@ -37,7 +36,7 @@ module.exports.getAllVehicles = (req, res) => {
   VehicleModel.find({}, (err, data) => {
     if (err) res.status(500).send(err);
     else res.send(data);
-  });
+  }).populate("unavailableDates");
 };
 
 // Delete a Vehicle with the specified vehicleId in the request
