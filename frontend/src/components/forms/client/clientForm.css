@@ -1,6 +1,6 @@
 .client_form,
 .client_update_form {
-  display: none;
+  display: flex;
   flex-direction: column;
   margin-top: 3vw;
   margin-bottom: 5vw;

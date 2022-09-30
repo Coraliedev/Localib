@@ -24,14 +24,7 @@ export const Vehicle: React.FC<Vehicleprops> = ({
       });
     },
   });
-
-  // display vehicle update form when click on edit button
-  const displayEditVehicleForm = () => {
-    let vehicleForm = document.getElementsByTagName("form")[1];
-    vehicleForm.style.display = "flex";
-    modifyVehicleValue(vehicle);
-  };
-
+  
   return (
     <div className="vehicle">
       <div>
@@ -61,7 +54,7 @@ export const Vehicle: React.FC<Vehicleprops> = ({
       >
         <RiDeleteBinLine />
       </button>
-      <button className="edit_button" onClick={() => displayEditVehicleForm()}>
+      <button className="edit_button" onClick={() => modifyVehicleValue(vehicle)}>
         <GrEdit />
       </button>
     </div>

@@ -9,7 +9,8 @@ import { useState } from "react";
 
 const ClientsPage: React.FC = () => {
   const [client, setClient] = useState<ClientModel>({} as ClientModel);
-
+  const [add, setAdd] = useState<boolean>(false);
+  
   // get all clients from database
   const { data: clients } = useQuery("clients", getAllClients, {
     refetchOnWindowFocus: false,
@@ -17,12 +18,6 @@ const ClientsPage: React.FC = () => {
     staleTime: Infinity,
     cacheTime: Infinity,
   });
-
-  // display client form when click on add client button
-  const displayClientForm = () => {
-    let clientForm = document.getElementsByTagName("form")[0];
-    clientForm.style.display = "flex";
-  };
 
   return (
     <div>
@@ -33,7 +28,7 @@ const ClientsPage: React.FC = () => {
             type="button"
             className="add_client"
             value=" Ajouter un client"
-            onClick={() => displayClientForm()}
+            onClick={() => setAdd(true)}
           ></input>
           {clients &&
             clients.map((client: ClientModel) => (
@@ -44,8 +39,10 @@ const ClientsPage: React.FC = () => {
               />
             ))}
         </div>
-        <ClientForm className="client_form" />
-        <ClientForm className="client_update_form" client={client} />
+        {add === true && <ClientForm className="client_form" />}
+        {"_id" in client && (
+          <ClientForm className="client_update_form" client={client} />
+        )}
       </div>
     </div>
   );

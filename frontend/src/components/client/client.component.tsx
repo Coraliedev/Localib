@@ -24,15 +24,6 @@ export const Client: React.FC<ClientProps> = ({
     },
   });
 
-  /**
-   * When the user clicks on the edit button, the form for add client to the database will appear.
-   */
-  const displayEditClientForm = () => {
-    let clientUpdateForm = document.getElementsByTagName("form")[1];
-    clientUpdateForm.style.display = "flex";
-    modifyClientValue(client);
-  };
-
   return (
     <div className="client">
       <div>
@@ -58,7 +49,7 @@ export const Client: React.FC<ClientProps> = ({
       >
         <RiDeleteBinLine />
       </button>
-      <button className="edit_button" onClick={() => displayEditClientForm()}>
+      <button className="edit_button" onClick={() => modifyClientValue(client)}>
         <GrEdit />
       </button>
     </div>

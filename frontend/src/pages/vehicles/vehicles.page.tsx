@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { VehicleForm } from "../../components/forms/vehicle/vehicleForm.component";
 import Header from "../../components/header/header.component";
@@ -9,7 +9,9 @@ import "./vehicles.page.css";
 
 const VehiclesPage: React.FC = () => {
   const queryClient = useQueryClient();
+
   const [vehicle, setVehicle] = useState<VehicleModel>({} as VehicleModel);
+  const [add, setAdd] = useState<boolean>(false);
 
   // get all vehicles from database
   const { data: vehicles } = useQuery("vehicles", getAllVehicles, {
@@ -47,17 +49,10 @@ const VehiclesPage: React.FC = () => {
         }
       }
       if (vehicle.unavailableDates && vehicle.unavailableDates.length === 0) {
-        console.log("no date");
         return vehicle;
       }
     });
     queryClient.setQueryData("vehicles", filterByDate);
-  };
-
-  // display vehicle form when click on add vehicle button
-  const displayVehicleForm = () => {
-    let vehicleForm = document.getElementsByTagName("form")[0];
-    vehicleForm.style.display = "flex";
   };
 
   return (
@@ -69,7 +64,7 @@ const VehiclesPage: React.FC = () => {
             type="button"
             className="add_vehicle"
             value="Ajouter une voiture"
-            onClick={() => displayVehicleForm()}
+            onClick={() => setAdd(true)}
           ></input>
           <input
             type="button"
@@ -90,8 +85,10 @@ const VehiclesPage: React.FC = () => {
               />
             ))}
         </div>
-        <VehicleForm className="vehicle_form" />
-        <VehicleForm className="vehicle_update_form" vehicle={vehicle} />
+        {add === true && <VehicleForm className="vehicle_form" />}
+        {"_id" in vehicle && (
+          <VehicleForm className="vehicle_update_form" vehicle={vehicle} />
+        )}
       </div>
     </div>
   );
