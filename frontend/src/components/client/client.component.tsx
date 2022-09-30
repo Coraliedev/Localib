@@ -8,11 +8,13 @@ import { GrEdit } from "react-icons/gr";
 interface ClientProps {
   client: ClientModel;
   modifyClientValue: (client: ClientModel) => void;
+  modifyAddValue: (add: boolean) => void;
 }
 
 export const Client: React.FC<ClientProps> = ({
   client,
   modifyClientValue,
+  modifyAddValue,
 }) => {
   let birthdate = new Date(client.birthdate).toLocaleDateString();
   const queryClient = useQueryClient();
@@ -49,7 +51,13 @@ export const Client: React.FC<ClientProps> = ({
       >
         <RiDeleteBinLine />
       </button>
-      <button className="edit_button" onClick={() => modifyClientValue(client)}>
+      <button
+        className="edit_button"
+        onClick={() => {
+          modifyClientValue(client);
+          modifyAddValue(false);
+        }}
+      >
         <GrEdit />
       </button>
     </div>

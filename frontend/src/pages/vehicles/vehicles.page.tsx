@@ -64,7 +64,10 @@ const VehiclesPage: React.FC = () => {
             type="button"
             className="add_vehicle"
             value="Ajouter une voiture"
-            onClick={() => setAdd(true)}
+            onClick={() => {
+              setAdd(true);
+              setVehicle({} as VehicleModel);
+            }}
           ></input>
           <input
             type="button"
@@ -82,6 +85,7 @@ const VehiclesPage: React.FC = () => {
                 key={vehicle._id}
                 vehicle={vehicle}
                 modifyVehicleValue={setVehicle}
+                modifyAddValue={setAdd}
               />
             ))}
         </div>

@@ -8,11 +8,13 @@ import "./vehicle.css";
 interface Vehicleprops {
   vehicle: VehicleModel;
   modifyVehicleValue: (vehicle: VehicleModel) => void;
+  modifyAddValue: (add: boolean) => void;
 }
 
 export const Vehicle: React.FC<Vehicleprops> = ({
   vehicle,
   modifyVehicleValue,
+  modifyAddValue,
 }) => {
   const queryClient = useQueryClient();
 
@@ -24,7 +26,7 @@ export const Vehicle: React.FC<Vehicleprops> = ({
       });
     },
   });
-  
+
   return (
     <div className="vehicle">
       <div>
@@ -54,7 +56,13 @@ export const Vehicle: React.FC<Vehicleprops> = ({
       >
         <RiDeleteBinLine />
       </button>
-      <button className="edit_button" onClick={() => modifyVehicleValue(vehicle)}>
+      <button
+        className="edit_button"
+        onClick={() => {
+          modifyVehicleValue(vehicle);
+          modifyAddValue(false);
+        }}
+      >
         <GrEdit />
       </button>
     </div>

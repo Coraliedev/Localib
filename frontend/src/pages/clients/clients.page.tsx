@@ -10,7 +10,7 @@ import { useState } from "react";
 const ClientsPage: React.FC = () => {
   const [client, setClient] = useState<ClientModel>({} as ClientModel);
   const [add, setAdd] = useState<boolean>(false);
-  
+
   // get all clients from database
   const { data: clients } = useQuery("clients", getAllClients, {
     refetchOnWindowFocus: false,
@@ -28,7 +28,10 @@ const ClientsPage: React.FC = () => {
             type="button"
             className="add_client"
             value=" Ajouter un client"
-            onClick={() => setAdd(true)}
+            onClick={() => {
+              setAdd(true);
+              setClient({} as ClientModel);
+            }}
           ></input>
           {clients &&
             clients.map((client: ClientModel) => (
@@ -36,6 +39,7 @@ const ClientsPage: React.FC = () => {
                 key={client._id}
                 client={client}
                 modifyClientValue={setClient}
+                modifyAddValue={setAdd}
               />
             ))}
         </div>
