@@ -18,17 +18,9 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
   const queryClient = useQueryClient();
 
   // add vehicle to database
-  const { mutate: newVehicle } = useMutation(addVehicle, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("vehicles");
-    },
-  });
+  const { mutate: newVehicle } = useMutation(addVehicle);
 
-  const { mutate: updateVehicle } = useMutation(updateVehicleById, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("vehicles");
-    },
-  });
+  const { mutate: updateVehicle } = useMutation(updateVehicleById);
 
   const submitVehicle = (e: any) => {
     e.preventDefault();
@@ -37,16 +29,29 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       model: e.target[1].value,
       matriculation: e.target[2].value,
       state: e.target[3].value,
-      available: e.target[4].value,
-      locationPrice: e.target[5].value,
-      type: e.target[6].value,
+      locationPrice: e.target[4].value,
+      type: e.target[5].value,
     };
     if (className === "vehicle_form") {
-      newVehicle(thisVehicle);
+      newVehicle(thisVehicle, {
+        onSuccess: () => {
+          queryClient.setQueriesData("vehicles", (oldData: any) => {
+            return [...oldData, thisVehicle];
+          });
+        },
+      });
     }
     if (className === "vehicle_update_form" && vehicle) {
       const VehicleUpdate = [vehicle._id, thisVehicle];
-      updateVehicle(VehicleUpdate);
+      updateVehicle(VehicleUpdate, {
+        onSuccess: () => {
+          queryClient.setQueriesData("vehicles", (oldData: any) => {
+            return oldData.map((v: VehicleModel) =>
+              v._id === vehicle._id ? thisVehicle : v
+            );
+          });
+        },
+      });
     }
     e.target.reset();
     e.target.style.display = "none";
@@ -54,19 +59,34 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
 
   return (
     <form name={className} className={className} onSubmit={submitVehicle}>
-      <h2 className="title_vehicle_update_form" >Modifier véhicule</h2>
+      <h2 className="title_vehicle_update_form">Modifier véhicule</h2>
       <h2 className="title_vehicle_form">Nouveau véhicule</h2>
       <div className="brand">
         <label htmlFor="brand">Marque:</label>
-        <input type="text" name="brand" id="brand" defaultValue={vehicle?.brand}/>
+        <input
+          type="text"
+          name="brand"
+          id="brand"
+          defaultValue={vehicle?.brand}
+        />
       </div>
       <div className="model">
         <label htmlFor="model">Modèle:</label>
-        <input type="text" name="model" id="model" defaultValue={vehicle?.model}/>
+        <input
+          type="text"
+          name="model"
+          id="model"
+          defaultValue={vehicle?.model}
+        />
       </div>
       <div className="matriculation">
         <label htmlFor="matriculation">Immatriculation:</label>
-        <input type="text" name="matriculation" id="matriculation" defaultValue={vehicle?.matriculation}/>
+        <input
+          type="text"
+          name="matriculation"
+          id="matriculation"
+          defaultValue={vehicle?.matriculation}
+        />
       </div>
       <div className="state">
         <label htmlFor="state">Etat:</label>
@@ -77,16 +97,14 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           <option value="D">D</option>
         </select>
       </div>
-      <div className="available">
-        <label htmlFor="available">Disponible:</label>
-        <select name="available" id="available">
-          <option value="true">Oui</option>
-          <option value="false">Non</option>
-        </select>
-      </div>
       <div className="locationPrice">
         <label htmlFor="locationPrice">Prix à la journée:</label>
-        <input type="number" name="locationPrice" id="locationPrice" defaultValue={vehicle?.locationPrice} />
+        <input
+          type="number"
+          name="locationPrice"
+          id="locationPrice"
+          defaultValue={vehicle?.locationPrice}
+        />
       </div>
       <div className="type">
         <label htmlFor="type">Type:</label>

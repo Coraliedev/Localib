@@ -19,7 +19,9 @@ export const Vehicle: React.FC<Vehicleprops> = ({
   // delete vehicle from database
   const { mutate: handleDeleteVehicle } = useMutation(deleteVehicle, {
     onSuccess: () => {
-      queryClient.invalidateQueries("vehicles");
+      queryClient.setQueriesData("vehicles", (oldData: any) => {
+        return oldData.filter((v: VehicleModel) => v._id !== vehicle._id);
+      });
     },
   });
 
@@ -45,9 +47,6 @@ export const Vehicle: React.FC<Vehicleprops> = ({
         </p>
         <p>
           <span>Etat</span> : {vehicle.state}
-        </p>
-        <p>
-          <span>Disponible</span> : {vehicle.available ? "Oui" : "Non"}
         </p>
         <p>
           <span>Prix à la journée</span> : {vehicle.locationPrice} €

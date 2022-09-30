@@ -1,8 +1,6 @@
 .vehicle {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   max-width: 65vw;
   min-width: 65vw;
   background-color: #fff;
