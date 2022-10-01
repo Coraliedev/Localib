@@ -1,3 +1,4 @@
+import { VehicleAttributeNames } from "../../enums/vehicleAttributeNames.enum";
 import VehicleModel from "../../models/vehicle.model";
 import { DeleteButton } from "../buttons/delete_button/deleteButton.component";
 import { UpdateButton } from "../buttons/update_button/updateButton.component";
@@ -15,10 +16,24 @@ export const Vehicle: React.FC<Vehicleprops> = ({
   modifyVehicleValue,
   modifyAddValue,
 }) => {
+  
+  let vehicleInfos = [
+    [VehicleAttributeNames.Marque, vehicle?.brand],
+    [VehicleAttributeNames.Modèle, vehicle?.model],
+    [VehicleAttributeNames.Immatriculation, vehicle?.matriculation],
+    [VehicleAttributeNames.Etat, vehicle?.state],
+    [VehicleAttributeNames.PrixDeLocation, vehicle?.locationPrice],
+    [VehicleAttributeNames.Type, vehicle?.type],
+  ];
+
   return (
-    <div>
+    <div className="vehicle">
       <div>
-        <CardInfos key={vehicle._id} vehicle={vehicle} />
+        <CardInfos
+          key={vehicle._id}
+          entity="vehicle"
+          entityInfos={vehicleInfos}
+        />
       </div>
       <DeleteButton vehicle={vehicle} />
       <UpdateButton

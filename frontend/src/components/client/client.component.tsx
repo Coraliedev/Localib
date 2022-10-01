@@ -3,6 +3,7 @@ import "./client.css";
 import { CardInfos } from "../cardinfos/cardinfos.component";
 import { DeleteButton } from "../buttons/delete_button/deleteButton.component";
 import { UpdateButton } from "../buttons/update_button/updateButton.component";
+import { ClientAttributeNames } from "../../enums/clientAttributeNames.enum";
 
 interface ClientProps {
   client: ClientModel;
@@ -15,9 +16,17 @@ export const Client: React.FC<ClientProps> = ({
   modifyClientValue,
   modifyAddValue,
 }) => {
+
+  let clientInfos = [
+    [ClientAttributeNames.Nom, client?.lastname],
+    [ClientAttributeNames.Prenom, client?.firstname],
+    [ClientAttributeNames.Téléphone, client?.phone],
+    [ClientAttributeNames.DateDeNaissance, new Date(client?.birthdate!).toLocaleDateString()],
+    [ClientAttributeNames.Email, client?.email],
+  ];
   return (
-    <div>
-      <CardInfos client={client} />
+    <div className="client">
+      <CardInfos entity="client" entityInfos={clientInfos} />
       <DeleteButton client={client} />
       <UpdateButton
         client={client}

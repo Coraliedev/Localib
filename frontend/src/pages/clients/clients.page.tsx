@@ -4,9 +4,9 @@ import ClientModel from "../../models/client.model";
 import "./clients.page.css";
 import Header from "../../components/header/header.component";
 import { Client } from "../../components/client/client.component";
-import { ClientForm } from "../../components/forms/client/clientForm.component";
 import { useState } from "react";
 import { AddButton } from "../../components/buttons/add_button/addButton.component";
+import { Form } from "../../components/form/form.component";
 
 const ClientsPage: React.FC = () => {
   const [client, setClient] = useState<ClientModel>({} as ClientModel);
@@ -43,9 +43,9 @@ const ClientsPage: React.FC = () => {
               />
             ))}
         </div>
-        {add === true && <ClientForm className="client_form" />}
+        {add === true && <Form className="client_form" formName="Nouveau client" client={ {} as ClientModel}  />}
         {"_id" in client && (
-          <ClientForm className="client_update_form" client={client} />
+          <Form className="client_update_form" client={client} formName="Modifier client" />
         )}
       </div>
     </div>

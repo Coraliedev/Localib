@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { AddButton } from "../../components/buttons/add_button/addButton.component";
-import { VehicleForm } from "../../components/forms/vehicle/vehicleForm.component";
+import { Form } from "../../components/form/form.component";
 import Header from "../../components/header/header.component";
 import { Vehicle } from "../../components/vehicles/vehicle.component";
 import VehicleModel from "../../models/vehicle.model";
@@ -87,9 +87,15 @@ const VehiclesPage: React.FC = () => {
               />
             ))}
         </div>
-        {add === true && <VehicleForm className="vehicle_form" />}
+        {add === true && (
+          <Form className="vehicle_form" formName="Nouveau véhicule" vehicle={{} as VehicleModel} />
+        )}
         {"_id" in vehicle && (
-          <VehicleForm className="vehicle_update_form" vehicle={vehicle} />
+          <Form
+            className="vehicle_update_form"
+            vehicle={vehicle}
+            formName="Modifier véhicule"
+          />
         )}
       </div>
     </div>
