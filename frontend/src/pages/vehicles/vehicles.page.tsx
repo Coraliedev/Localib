@@ -57,7 +57,7 @@ const VehiclesPage: React.FC = () => {
 
   return (
     <div>
-      <Header />
+      <Header className="vehicles" />
       <div className="vehicles">
         <div>
           <input

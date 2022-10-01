@@ -3,11 +3,15 @@ import "./header.css";
 
 const logoLocalib = require("../../assets/localib.png");
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({className}) => {
   return (
     <div className="header">
       <img src={logoLocalib} alt="logo Localib" className="logo" />
-      <Navbar />
+      <Navbar className={className} />
     </div>
   );
 };

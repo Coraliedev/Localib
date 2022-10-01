@@ -21,7 +21,7 @@ const ClientsPage: React.FC = () => {
 
   return (
     <div>
-      <Header />
+      <Header className="clients" />
       <div className="clients">
         <div>
           <input

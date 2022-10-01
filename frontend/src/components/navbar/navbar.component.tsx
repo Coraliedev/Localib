@@ -1,15 +1,17 @@
 import "./navbar.css";
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  className?: string;
+}
+export const Navbar: React.FC<NavbarProps>= ({className}) => {
   return (
-    <nav className="nav">
+    <nav className="nav" id={className+"_nav"}>
       <a href="/vehicles">
         <span>Véhicules</span>
       </a>
       <a href="/clients">
         <span>Clients</span>
       </a>
-
       <a href="/rents">
         <span>Locations</span>
       </a>
