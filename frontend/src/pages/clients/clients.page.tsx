@@ -6,6 +6,7 @@ import Header from "../../components/header/header.component";
 import { Client } from "../../components/client/client.component";
 import { ClientForm } from "../../components/forms/client/clientForm.component";
 import { useState } from "react";
+import { AddButton } from "../../components/buttons/add_button/addButton.component";
 
 const ClientsPage: React.FC = () => {
   const [client, setClient] = useState<ClientModel>({} as ClientModel);
@@ -24,15 +25,14 @@ const ClientsPage: React.FC = () => {
       <Header className="clients" />
       <div className="clients">
         <div>
-          <input
-            type="button"
+          <AddButton
+            value="Ajouter un client"
             className="add_client"
-            value=" Ajouter un client"
             onClick={() => {
               setAdd(true);
               setClient({} as ClientModel);
             }}
-          ></input>
+          />
           {clients &&
             clients.map((client: ClientModel) => (
               <Client

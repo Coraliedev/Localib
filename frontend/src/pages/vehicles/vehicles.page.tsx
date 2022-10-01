@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
+import { AddButton } from "../../components/buttons/add_button/addButton.component";
 import { VehicleForm } from "../../components/forms/vehicle/vehicleForm.component";
 import Header from "../../components/header/header.component";
 import { Vehicle } from "../../components/vehicles/vehicle.component";
@@ -8,8 +9,6 @@ import { getAllVehicles } from "../../services/vehicles.services";
 import "./vehicles.page.css";
 
 const VehiclesPage: React.FC = () => {
-  const queryClient = useQueryClient();
-
   const [vehicle, setVehicle] = useState<VehicleModel>({} as VehicleModel);
   const [add, setAdd] = useState<boolean>(false);
 
@@ -22,54 +21,53 @@ const VehiclesPage: React.FC = () => {
   });
 
   // filter vehicles by type
-  const filterVehiclesByMoto = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const filterByMoto = vehicles.filter(
-      (vehicle: VehicleModel) => vehicle.type === "Moto"
-    );
-    console.log(filterByMoto);
-    queryClient.setQueriesData("vehicles", filterByMoto);
-  };
+  // const filterVehiclesByMoto = (e: any) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const filterByMoto = vehicles.filter(
+  //     (vehicle: VehicleModel) => vehicle.type === "Moto"
+  //   );
+  //   console.log(filterByMoto);
+  //   queryClient.setQueriesData("vehicles", filterByMoto);
+  // };
 
   // filter vehicles by date disponibility
-  const filterVehiclesByDate = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const filterByDate = vehicles.filter((vehicle: VehicleModel) => {
-      let thisdate = new Date();
-      if (vehicle.unavailableDates && vehicle.unavailableDates.length > 0) {
-        console.log("vehicle.unavailableDates", vehicle.unavailableDates);
-        for (let i = 0; i < vehicle.unavailableDates.length; i++) {
-          let startDate = new Date(vehicle.unavailableDates[i][0]);
-          let endDate = new Date(vehicle.unavailableDates[i][1]);
-          if (thisdate <= startDate && thisdate >= endDate) {
-            return vehicle;
-          }
-        }
-      }
-      if (vehicle.unavailableDates && vehicle.unavailableDates.length === 0) {
-        return vehicle;
-      }
-    });
-    queryClient.setQueryData("vehicles", filterByDate);
-  };
+  // const filterVehiclesByDate = (e: any) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const filterByDate = vehicles.filter((vehicle: VehicleModel) => {
+  //     let thisdate = new Date();
+  //     if (vehicle.unavailableDates && vehicle.unavailableDates.length > 0) {
+  //       console.log("vehicle.unavailableDates", vehicle.unavailableDates);
+  //       for (let i = 0; i < vehicle.unavailableDates.length; i++) {
+  //         let startDate = new Date(vehicle.unavailableDates[i][0]);
+  //         let endDate = new Date(vehicle.unavailableDates[i][1]);
+  //         if (thisdate <= startDate && thisdate >= endDate) {
+  //           return vehicle;
+  //         }
+  //       }
+  //     }
+  //     if (vehicle.unavailableDates && vehicle.unavailableDates.length === 0) {
+  //       return vehicle;
+  //     }
+  //   });
+  //   queryClient.setQueryData("vehicles", filterByDate);
+  // };
 
   return (
     <div>
       <Header className="vehicles" />
       <div className="vehicles">
         <div>
-          <input
-            type="button"
+          <AddButton
+            value="Ajouter un véhicule"
             className="add_vehicle"
-            value="Ajouter une voiture"
             onClick={() => {
               setAdd(true);
               setVehicle({} as VehicleModel);
             }}
-          ></input>
-          <input
+          />
+          {/* <input
             type="button"
             onClick={(e) => filterVehiclesByMoto(e)}
             value="Filtrer moto"
@@ -78,7 +76,7 @@ const VehiclesPage: React.FC = () => {
             type="button"
             onClick={(e) => filterVehiclesByDate(e)}
             value="Filtrer date"
-          ></input>
+          ></input> */}
           {vehicles &&
             vehicles.map((vehicle: any) => (
               <Vehicle
