@@ -1,17 +1,22 @@
-import { useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { AddButton } from "../../components/buttons/add_button/addButton.component";
 import { Form } from "../../components/form/form.component";
 import Header from "../../components/header/header.component";
+import { SearchBar } from "../../components/searchBar/searchBar.component";
 import { Vehicle } from "../../components/vehicles/vehicle.component";
+import { VehicleSearch } from "../../enums/vehicleSearch.enum";
 import VehicleModel from "../../models/vehicle.model";
 import { getAllVehicles } from "../../services/vehicles.services";
 import "./vehicles.page.css";
 
 const VehiclesPage: React.FC = () => {
+  const queryClient = useQueryClient();
+
   const [vehicle, setVehicle] = useState<VehicleModel>({} as VehicleModel);
   const [add, setAdd] = useState<boolean>(false);
-
+  const [search, setSearch] = useState<string | undefined>();
+  console.log(search);
   // get all vehicles from database
   const { data: vehicles } = useQuery("vehicles", getAllVehicles, {
     refetchOnWindowFocus: false,
@@ -19,40 +24,6 @@ const VehiclesPage: React.FC = () => {
     staleTime: Infinity,
     cacheTime: Infinity,
   });
-
-  // filter vehicles by type
-  // const filterVehiclesByMoto = (e: any) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const filterByMoto = vehicles.filter(
-  //     (vehicle: VehicleModel) => vehicle.type === "Moto"
-  //   );
-  //   console.log(filterByMoto);
-  //   queryClient.setQueriesData("vehicles", filterByMoto);
-  // };
-
-  // filter vehicles by date disponibility
-  // const filterVehiclesByDate = (e: any) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const filterByDate = vehicles.filter((vehicle: VehicleModel) => {
-  //     let thisdate = new Date();
-  //     if (vehicle.unavailableDates && vehicle.unavailableDates.length > 0) {
-  //       console.log("vehicle.unavailableDates", vehicle.unavailableDates);
-  //       for (let i = 0; i < vehicle.unavailableDates.length; i++) {
-  //         let startDate = new Date(vehicle.unavailableDates[i][0]);
-  //         let endDate = new Date(vehicle.unavailableDates[i][1]);
-  //         if (thisdate <= startDate && thisdate >= endDate) {
-  //           return vehicle;
-  //         }
-  //       }
-  //     }
-  //     if (vehicle.unavailableDates && vehicle.unavailableDates.length === 0) {
-  //       return vehicle;
-  //     }
-  //   });
-  //   queryClient.setQueryData("vehicles", filterByDate);
-  // };
 
   return (
     <div>
@@ -67,28 +38,40 @@ const VehiclesPage: React.FC = () => {
               setVehicle({} as VehicleModel);
             }}
           />
-          {/* <input
-            type="button"
-            onClick={(e) => filterVehiclesByMoto(e)}
-            value="Filtrer moto"
-          ></input>
-          <input
-            type="button"
-            onClick={(e) => filterVehiclesByDate(e)}
-            value="Filtrer date"
-          ></input> */}
-          {vehicles &&
-            vehicles.map((vehicle: any) => (
-              <Vehicle
-                key={vehicle._id}
-                vehicle={vehicle}
-                modifyVehicleValue={setVehicle}
-                modifyAddValue={setAdd}
-              />
-            ))}
+          <SearchBar modifySearchValue={setSearch} />
+          {vehicles && search?.length! > 0
+            ? vehicles
+                .filter((key: any) => {
+                  return (
+                    key[VehicleSearch.brand].toLowerCase().includes(search) ||
+                    key[VehicleSearch.model].toLowerCase().includes(search) ||
+                    key[VehicleSearch.matriculation].toLowerCase().includes(search) ||
+                    key[VehicleSearch.type].toLowerCase().includes(search)
+                  );
+                })
+                .map((vehicle: any) => (
+                  <Vehicle
+                    key={vehicle._id}
+                    vehicle={vehicle}
+                    modifyVehicleValue={setVehicle}
+                    modifyAddValue={setAdd}
+                  />
+                ))
+            : vehicles?.map((vehicle: any) => (
+                <Vehicle
+                  key={vehicle._id}
+                  vehicle={vehicle}
+                  modifyVehicleValue={setVehicle}
+                  modifyAddValue={setAdd}
+                />
+              ))}
         </div>
         {add === true && (
-          <Form className="vehicle_form" formName="Nouveau véhicule" vehicle={{} as VehicleModel} />
+          <Form
+            className="vehicle_form"
+            formName="Nouveau véhicule"
+            vehicle={{} as VehicleModel}
+          />
         )}
         {"_id" in vehicle && (
           <Form

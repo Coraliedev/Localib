@@ -7,10 +7,13 @@ import { Client } from "../../components/client/client.component";
 import { useState } from "react";
 import { AddButton } from "../../components/buttons/add_button/addButton.component";
 import { Form } from "../../components/form/form.component";
+import { ClientSearch } from "../../enums/clientSearch.enum";
+import { SearchBar } from "../../components/searchBar/searchBar.component";
 
 const ClientsPage: React.FC = () => {
   const [client, setClient] = useState<ClientModel>({} as ClientModel);
   const [add, setAdd] = useState<boolean>(false);
+  const [search, setSearch] = useState<string | undefined>();
 
   // get all clients from database
   const { data: clients } = useQuery("clients", getAllClients, {
@@ -25,27 +28,58 @@ const ClientsPage: React.FC = () => {
       <Header className="clients" />
       <div className="clients">
         <div>
-          <AddButton
-            value="Ajouter un client"
-            className="add_client"
-            onClick={() => {
-              setAdd(true);
-              setClient({} as ClientModel);
-            }}
-          />
-          {clients &&
-            clients.map((client: ClientModel) => (
-              <Client
-                key={client._id}
-                client={client}
-                modifyClientValue={setClient}
-                modifyAddValue={setAdd}
-              />
-            ))}
+          <div>
+            <AddButton
+              value="Ajouter un client"
+              className="add_client"
+              onClick={() => {
+                setAdd(true);
+                setClient({} as ClientModel);
+              }}
+            />
+            <SearchBar modifySearchValue={setSearch} />
+          </div>
+          {clients && search?.length! > 0
+            ? clients
+                .filter((key: any) => {
+                  return (
+                    key[ClientSearch.firstname]
+                      .toLowerCase()
+                      .includes(search) ||
+                    key[ClientSearch.lastname].toLowerCase().includes(search) ||
+                    key[ClientSearch.email].toLowerCase().includes(search)
+                  );
+                })
+                .map((client: ClientModel) => (
+                  <Client
+                    key={client._id}
+                    client={client}
+                    modifyClientValue={setClient}
+                    modifyAddValue={setAdd}
+                  />
+                ))
+            : clients?.map((client: ClientModel) => (
+                <Client
+                  key={client._id}
+                  client={client}
+                  modifyClientValue={setClient}
+                  modifyAddValue={setAdd}
+                />
+              ))}
         </div>
-        {add === true && <Form className="client_form" formName="Nouveau client" client={ {} as ClientModel}  />}
+        {add === true && (
+          <Form
+            className="client_form"
+            formName="Nouveau client"
+            client={{} as ClientModel}
+          />
+        )}
         {"_id" in client && (
-          <Form className="client_update_form" client={client} formName="Modifier client" />
+          <Form
+            className="client_update_form"
+            client={client}
+            formName="Modifier client"
+          />
         )}
       </div>
     </div>

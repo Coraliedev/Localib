@@ -16,7 +16,6 @@ export const Vehicle: React.FC<Vehicleprops> = ({
   modifyVehicleValue,
   modifyAddValue,
 }) => {
-  
   let vehicleInfos = [
     [VehicleAttributeNames.Marque, vehicle?.brand],
     [VehicleAttributeNames.Modèle, vehicle?.model],
