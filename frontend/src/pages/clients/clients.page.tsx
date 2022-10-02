@@ -28,7 +28,7 @@ const ClientsPage: React.FC = () => {
       <Header className="clients" />
       <div className="clients">
         <div>
-          <div>
+          <div className="client_toolbar">
             <AddButton
               value="Ajouter un client"
               className="add_client"
@@ -43,12 +43,11 @@ const ClientsPage: React.FC = () => {
             ? clients
                 .filter((key: any) => {
                   return (
-                    key[ClientSearch.firstname]
-                      .toLowerCase()
-                      .includes(search) ||
-                    key[ClientSearch.lastname].toLowerCase().includes(search) ||
-                    key[ClientSearch.email].toLowerCase().includes(search)
-                  );
+                    Object.values(ClientSearch).some((value) => {
+                      return key[value]
+                        .toLowerCase()
+                        .includes(search!.toLowerCase());
+                    }));
                 })
                 .map((client: ClientModel) => (
                   <Client

@@ -1,5 +1,6 @@
 import { VehicleAttributeNames } from "../../enums/vehicleAttributeNames.enum";
 import VehicleModel from "../../models/vehicle.model";
+import { AddToLocationButton } from "../buttons/location_button/addToLocation.component";
 import { DeleteButton } from "../buttons/delete_button/deleteButton.component";
 import { UpdateButton } from "../buttons/update_button/updateButton.component";
 import { CardInfos } from "../cardinfos/cardinfos.component";
@@ -9,12 +10,14 @@ interface Vehicleprops {
   vehicle: VehicleModel;
   modifyVehicleValue: (vehicle: VehicleModel) => void;
   modifyAddValue: (add: boolean) => void;
+  available?: boolean;
 }
 
 export const Vehicle: React.FC<Vehicleprops> = ({
   vehicle,
   modifyVehicleValue,
   modifyAddValue,
+  available
 }) => {
   let vehicleInfos = [
     [VehicleAttributeNames.Marque, vehicle?.brand],
@@ -42,6 +45,7 @@ export const Vehicle: React.FC<Vehicleprops> = ({
           modifyAddValue(false);
         }}
       />
+      {available===true && <AddToLocationButton vehicle={vehicle} />}
     </div>
   );
 };

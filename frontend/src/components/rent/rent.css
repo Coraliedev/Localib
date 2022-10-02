@@ -1,4 +1,4 @@
-.vehicle {
+.rent {
   display: flex;
   justify-content: space-around;
   max-width: 65vw;
@@ -10,5 +10,8 @@
   margin: 10px;
   margin-left: 5vw;
   transition: all 0.2s ease-in-out;
-  height: 7vw;
+}
+
+.rent:first-child {
+  margin-top: 3vw
 }

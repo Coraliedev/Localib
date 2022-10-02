@@ -4,6 +4,7 @@ import ClientModel from "../../../models/client.model";
 import VehicleModel from "../../../models/vehicle.model";
 import { deleteClient } from "../../../services/client.services";
 import { deleteVehicle } from "../../../services/vehicles.services";
+import "./deleteButton.css";
 
 interface DeleteButtonProps {
   client?: ClientModel;

@@ -1,9 +1,12 @@
 .client_form,
-.client_update_form {
+.client_update_form,
+.vehicle_form,
+.vehicle_update_form {
   display: flex;
   flex-direction: column;
+  max-height: 75vh;
   margin-top: 3vw;
-  margin-bottom: 5vw;
+  margin-bottom: 1vw;
   max-width: 30vw;
   margin-right: 3vw;
   margin-left: 5vw;
@@ -13,7 +16,9 @@
 }
 
 .client_form div,
-.client_update_form div {
+.client_update_form div,
+.vehicle_form div,
+.vehicle_update_form div {
   font-size: 25px;
   display: flex;
   flex-direction: column;
@@ -22,9 +27,10 @@
 }
 
 .client_form div input,
-.client_update_form div input {
+.client_update_form div input,
+.vehicle_form div input,
+.vehicle_update_form div input {
   width: 15vw;
-  height: 30px;
   text-align: center;
   background: none;
   border: thin solid;
@@ -32,18 +38,20 @@
   margin: 0 2vw;
 }
 
+.client_form div input,
+.client_update_form div input {
+  height: 30px;
+}
+.vehicle_form div input,
+.vehicle_update_form div input {
+  height: 25px;
+}
+
 h2 {
   text-align: center;
   font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.client_form .title_client_update_form {
-  display: none;
-}
-
-.client_update_form .title_client_form {
-  display: none;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
 }
 
 #submit {
@@ -53,40 +61,6 @@ h2 {
   border-radius: 10px;
   margin: 0 2vw;
   margin-top: 1vw;
-}
-
-.vehicle_form,
-.vehicle_update_form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3vw;
-  margin-bottom: 5vw;
-  max-width: 30vw;
-  margin-right: 3vw;
-  margin-left: 5vw;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.vehicle_form div,
-.vehicle_update_form div {
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.vehicle_form div input,
-.vehicle_update_form div input {
-  width: 15vw;
-  height: 25px;
-  text-align: center;
-  background: none;
-  border: thin solid;
-  border-radius: 0.5vw;
-  margin: 0 2vw;
 }
 
 .vehicle_form div input[type="checkbox"],
@@ -98,22 +72,3 @@ h2 {
   width: 5vw;
   margin: 0 auto;
 }
-
-.vehicle_form .title_vehicle_update_form {
-  display: none;
-}
-
-.vehicle_update_form .title_vehicle_form {
-  display: none;
-}
-
-#submit {
-  font-size: 20px;
-  background: none;
-  border: thin solid;
-  border-radius: 10px;
-  margin: 0 2vw;
-  margin-top: 1vw;
-  margin-bottom: 1vw;
-}
-

@@ -1,6 +1,7 @@
 import { GrEdit } from "react-icons/gr";
 import ClientModel from "../../../models/client.model";
 import VehicleModel from "../../../models/vehicle.model";
+import "./updateButton.css";
 
 interface UpdateButtonProps {
   vehicle?: VehicleModel;
