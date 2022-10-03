@@ -42,14 +42,13 @@ const VehiclesPage: React.FC = () => {
               dates[0] <= unavailableDateEnd
             ) {
               return false;
-            }
-            if (
+            } else if (
               dates[1] >= unavailableDateStart &&
               dates[1] <= unavailableDateEnd
             ) {
               return false;
             } else {
-              return true;
+              return vehicle;
             }
           }
         }

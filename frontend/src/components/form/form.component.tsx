@@ -109,7 +109,6 @@ export const Form: React.FC<FormProps> = ({
     }
     /* Resetting the form. */
     e.target.reset();
-    e.target.style.display = "none";
   };
 
   return (

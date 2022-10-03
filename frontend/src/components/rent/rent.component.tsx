@@ -1,6 +1,6 @@
-import { GrEdit } from "react-icons/gr";
-import { RiDeleteBinLine } from "react-icons/ri";
+
 import RentModel from "../../models/rent.model";
+import { Client } from "../client/client.component";
 import "./rent.css";
 
 interface RentProps {
@@ -18,6 +18,7 @@ export const Rent: React.FC<RentProps> = ({ rent }) => {
         <p>{rent.client.phone}</p>
         <p>{rent.client.email}</p>
       </div>
+
       <div>
         <p>{rent.vehicle.brand}</p>
         <p>{rent.vehicle.model}</p>
@@ -29,12 +30,12 @@ export const Rent: React.FC<RentProps> = ({ rent }) => {
         <p>au {endDate}</p>
         <p>{rent.price}€ TTC</p>
       </div>
-      <button className="delete_button">
+      {/* <button className="delete_button">
         <RiDeleteBinLine />
       </button>
       <button className="edit_button">
         <GrEdit />
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -1,11 +1,15 @@
+import { FormRent } from "../../components/form/formRent/formRent";
 import Header from "../../components/header/header.component";
+import "./createRent.page.css";
 
 const CreateRentPage: React.FC = () => {
   return (
-    <div>
-      <Header className="create_rent"/>
-      Create Rent Page
-    </div>
+    <>
+      <Header className="create_rent" />
+      <div className="rent_page">
+      <FormRent />
+      </div>
+    </>
   );
 };
 

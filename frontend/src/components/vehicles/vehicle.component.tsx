@@ -17,7 +17,7 @@ export const Vehicle: React.FC<Vehicleprops> = ({
   vehicle,
   modifyVehicleValue,
   modifyAddValue,
-  available
+  available,
 }) => {
   let vehicleInfos = [
     [VehicleAttributeNames.Marque, vehicle?.brand],
@@ -45,7 +45,9 @@ export const Vehicle: React.FC<Vehicleprops> = ({
           modifyAddValue(false);
         }}
       />
-      {available===true && <AddToLocationButton vehicle={vehicle} />}
+      {available === true && (
+        <AddToLocationButton entity={vehicle} entityName="vehicle" />
+      )}
     </div>
   );
 };
