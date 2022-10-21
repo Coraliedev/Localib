@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 interface NavbarProps {
@@ -6,18 +7,18 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps>= ({className}) => {
   return (
     <nav className="nav" id={className+"_nav"}>
-      <a href="/vehicles">
+      <Link to="/vehicles">
         <span>Véhicules</span>
-      </a>
-      <a href="/clients">
+      </Link>
+      <Link to="/clients">
         <span>Clients</span>
-      </a>
-      <a href="/rents">
+      </Link>
+      <Link to="/rents">
         <span>Locations</span>
-      </a>
-      <a href="/createrent">
+      </Link>
+      <Link to="/createrent">
         <span>Créer location</span>
-      </a>
+      </Link>
     </nav>
   );
 };
