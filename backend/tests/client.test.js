@@ -38,3 +38,14 @@ describe("POST /client", () => {
     expect(res.body.firstname).toBe("Test Client");
   });
 });
+
+/* Testint get client by id. */
+describe("GET /client/:id", () => {
+  it("should return a client", async () => {
+    const res = await request(app).get(
+      "/client/6358e503265202d14f99f129"
+    );
+    expect(res.statusCode).toBe(200);
+    expect(res.body.firstname).toBe("Test Client");
+  });
+});
