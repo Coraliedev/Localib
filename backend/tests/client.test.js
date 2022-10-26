@@ -22,3 +22,19 @@ describe("GET /client", () => {
     expect(res.body.length).toBeGreaterThan(0);
   });
 });
+
+/* Testing the POST route. */
+describe("POST /client", () => {
+  it("should create a new client", async () => {
+    const res = await request(app).post("/client").send({
+      firstname: "Test Client",
+      lastname: "Test Client",
+      email: "test2@gmail.com",
+      phone: "514-555-5555",
+      birthdate: "1990-01-01",
+    });
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("firstname");
+    expect(res.body.firstname).toBe("Test Client");
+  });
+});
